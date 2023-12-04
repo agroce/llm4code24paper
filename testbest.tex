@@ -101,7 +101,8 @@
 %%
 %% The "title" command has an optional parameter,
 %% allowing the author to define a "short title" to be used in page headers.
-\title{Testing is the Something or Other}
+\title{Software Testing is the Ideal Software Engineering Application
+  for Present-Generation Large Language Models}
 
 %%
 %% The "author" command and its associated commands are used to define
@@ -193,7 +194,25 @@
 %% The abstract is a short summary of the work to be presented in the
 %% article.
 \begin{abstract}
-The 
+Without denying the utility of current-generation Large Language
+Models (LLMs) for assisting developers in writing code, we propose
+that at present the most promising application of LLMs to software
+engineering can be found in the problem of software testing.  The
+consequences of generating faulty or insecure code are limited or
+nearly eliminated when the code in question is test code, rather than
+production' code.  Given the frequency with which current LLMs
+generate incorrect code or answers to questions about code, this
+reduction of the costs of failure (and thus the costs of verification of
+LLM output) makes using LLMs in testing more attractive than in actual
+development.  Furthermore, many software testing tasks that are not
+code-generation tasks benefit from ``good-enough'' answers, without
+requiring extreme accuracy (or precision) and allow an LLM to replace
+human effort that is often so cost-ineffective that in practice it is
+not attempted.  This may make powerful testing technique, such as
+mutation testing, that are currently limited in efficacy by costs,
+more practical; in a positive feedback loop, better test evaluation
+tools further reduce the costs of ``bad'' LLM-generated test code, by
+making it easier to detect.
 \end{abstract}
 
 %%
@@ -229,12 +248,12 @@ The
 \section{Introduction}
 
 
-\section{Code Generation: ``Core'' Code vs. Test Code}
+\section{Code Generation: Production Code vs. Test Code}
 
 The rationale behind our argument that software testing is the most
 promising application of current-day LLMs, given their capabiities,
 can be most easily understood by examining the difference between
-using LLMs to generate ``core'' code (application code that is
+using LLMs to generate \emph{production} code (application code that is
 executed when the code is deployed:  from the standpoint of testing,
 the ``code under test'' (CUT)) and using LLMs to
 generate \emph{test code}.  We proceed by examining the possible outcomes of
@@ -242,7 +261,7 @@ both tasks.
 
 \subsection{Case 1: Success}
 
-If an LLM generates correct, efficient ``core'' or test code, there is in one sense no
+If an LLM generates correct, efficient production or test code, there is in one sense no
 difference: the result is as desired.  However, there is still an
 advantage in the case of test code:  it may not be neccessary to have
 a human inspect it and determine its validity.  Operational code, in
@@ -274,12 +293,13 @@ neither kind of code generation has an obvious advantage.
 
 The most dangerous case for LLM-generated code, as with
 human-generated code, is that of subtle failure which only exhibits
-under rare input conditions.  For ``core'' code the consequences can
+under rare input conditions.  For production code the consequences can
 be arbitrary; the faulty code may not be detected until it is
 deployed, with the usual potentially disastrous consequences and
 costs.
 
-A particularly important subtle failure mode of LLM-generated core code is
+A particularly important subtle failure mode of LLM-generated
+production code is
 code that is ``correct'' but \emph{insecure}.  Previous studies have
 shown that, like code taken from sources such as stackoverflow,
 LLM-code may be prone to taking the ``easy path'' of functionality
@@ -307,8 +327,8 @@ bug in a program.
 The remaining case is test code that subtly fails to catch some
 erroneous aspects of behavior of the program under test.  However,
 this is, essentially, the typical case for all individual tests,
-manually or automatically constructed.  ``Core'' code is generally
-uniquely responsible for certain behaviors of a program; test code is
+manually or automatically constructed.  Production code is generally
+\emph{uniquely} responsible for certain behaviors of a program; test code is
 generally only partially responsible for detecting flaws in behavior,
 in well-designed test efforts.  It is seldom the case that anyone
 assumes a particular test is meant to catch all possible faults in a
