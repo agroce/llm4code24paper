@@ -337,6 +337,13 @@ least some bad behaviors is always useful, and this minimal criteria
 can be easily established by using simple, fully automated techniques
 such as mutation testing.
 
+It is well known that LLMs often vary in their performance of a task,
+sometimes more and sometimes less successful; in testing, it may often
+be practical to simply use a large number of LLM generated tests for
+the same code, assuming that redundnacy will be low cost (after all,
+in fuzzing thousands of ineffective tests are executed for each
+``useful'' test).  An equivalent approach for production code seems
+unlikely to usually be possible
 
 \bibliographystyle{plain}
 \bibliography{bibliography}
