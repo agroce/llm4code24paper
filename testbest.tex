@@ -367,6 +367,62 @@ in fuzzing thousands of ineffective tests are executed for each
 ``useful'' test).  An equivalent approach for production code seems
 unlikely to usually be possible.
 
+\section{Generating Test Code}
+
+We focus on factors that make generating test code a natural application of 
+LLMs. We argue that many of common pitfalls of generating source code are mitigated 
+or entirely not possible in the domain of software testing. In many circumstances, test 
+code is \emph{more} natural than source code, making it ideal for LLM application.
+
+\subsection{Stronger Metrics and Oracle}
+
+One challenge with source code generation is defining ''correctness'' or quantifying 
+how close a model's output is to what is desired.  Code generated should 1. resemble code that a \emph{developer} would 
+write 2. meet some kind of specification of program behavior. To address the first problem, researchers defined a wide 
+range of metrics, ranging from BLEU~\cite{BLEU}, ROUGE-L~\cite{ROUGE}, and even more code specific metrics that perform 
+AST matching and dataflow analysis such as CodeBLEU~\cite{CodeBLEU}, CrystalBLEU~\cite{CrystalBLEU} and CodeBertScore~\cite{CodeBERTScore}.
+However, fundamentally all these metrics do not capture the true notion of ``correctness'', a model could generate code that adheres to the 
+specification defined, while looking different than the developer ``gold'' code. Generating semantically equivalent code to what a developer wrote
+may have significantly lower lexical scores, despite being an instance of correct generation. Fundamentally, the core issue is that there 
+is no \emph{oracle} in code generation, thus these lexical metrics are just an approximation of what generated code should look like.
+
+Test generation does not suffer from these pitfalls. Unlike code generation, there is a strong \emph{oracle} in testing. Tests must exercise code 
+paths of the method under test and be able to catch regressions or potential bugs a developer might introduce into the code. For measuring whether 
+tests exercise paths of the method under test, one can measure code coverage by executing the test itself. Furthermore, to measure the oracular power 
+of the test, one can run mutation testing, measuring whether the test suite generated is capable of killing all synthetic bugs injected. Similar to 
+code generation, we also have the basic metrics of measuring whether the generated test compiles and passes on the code under test. All these metrics, 
+make test generation an ideal task for LLMs. Specifically, we can measure whether the generated test compiles, executes, measure code coverage and 
+even mutant killing capabilities. This combination of metrics also opens up software testing to Reinforcement Learning~\cite{rlhf},
+with a model being able to learn from these results of executing the generated tests how to improve test quality. This process can be completely automated, 
+unlike in code generation, where reinforcement learning requires human annotations of model output to learn a policy.
+
+\subsection{Potential for Easy Transfer Learning via Prompting}
+
+Test code and source code are fundamentally similar in structure and content. Test code leverages similar programming language 
+constructs such as control and data flow, often in a simplified way (test code tends to be less complex than the code it is testing).
+Modern LLMs have been pretrained on millions of source code tokens, thus these models have a strong understanding of code semantics 
+and behavior. This can be seem with CodeBERT~\cite{codebert} embeddings outperforming prior work such as Code2Vec~\cite{code2vec} 
+and TF-IDF~\cite{tfidf}, with the CodeBERT vectors capturing some notion of semantic similarity rather than pure token match (capture by techniques 
+such as TF-IDF). 
+
+This core similarity between code and tests, makes test generation an ideal task for LLMs. Specifically, with limited prompt engineering and 
+a couple examples of test code, one can generate entire test suites with a powerful model such as ChatGPT~\cite{gpttestgen, siddiq2023empirical}. 
+Even smaller models, trained with this relationship~\cite{catlm, starcoder} show significant promise, generating tests that compile, execute successfully, and 
+even automatically increase coverage.
+
+\subsection{Extreme Naturalness of Test Code}
+
+Software code has been fundamentally shown to be \emph{natural}, in other words there are common, repetitive patterns that can be 
+learned by neural models~\cite{naturalnessofcode}. This naturalness is a big reason why techniques such as code generation work so well, with LLMs 
+learning common patterns of code from the vast corpus of open source projects. 
+
+We argue that test code is even \emph{more natural} than source code, making it a prime application for LLMs. Take two pieces of code; they are likely 
+to share certain programming keywords, structure and control flow. However, typically code snippets still differ in many ways: the domain of code 
+likely correlates to which functions or libraries are used, the pre and post conditions likely differ, and the implementation is unlikely to be similar.
+\emph{Test code}, follows a much more rigid structure: there is some test setup, followed by an invocation to the method under test followed by a series of 
+properties that are validated. Furthermore, there are common, widely used test frameworks, that make test code very rendundant and natural. Even the validation of 
+method outputs consists of a small range of assertion functions defined by the library. We argue that this naturalness makes test generation an ideal application 
+of LLMs, as they would be able to learn these natural, redundant, test patterns. 
 
 \section{Beyond Generating Unit Tests}
 
