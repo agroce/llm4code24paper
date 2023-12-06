@@ -247,12 +247,34 @@ making it easier to detect.
 
 \section{Introduction}
 
+Much of the excitement (and fear) associated with the use of Large
+Language Models (LLMs) in software engineering has been associated
+with the idea of LLMs as assistants to, or replacements for,
+developers writing production code.  This paper argues that, given the
+present state of LLMs, they are better suited to tasks related to
+\emph{testing} code than to the core software engineering task of
+producing the code that is to be used in the real world.  Current
+generation LLMs are powerful, but are also prone to (unpredictable)
+error and in need of close human supervision.  Concerns about the
+correctness of LLM-generated code are greatly reduced in the context
+of using LLMs to generate tests; testing tasks imply that production
+code already exists.  The existence of this code gives LLMs a rich
+context that likely allows them to perform better, and (even more
+importantly) provides a simple check on the ``reasonableness'' of the
+generated tests.  If LLM-produced tests fail for existing, correct
+code, or do not improve objective, automated metrics such as code
+coverage or mutation score, they are, without costly human supervision
+or effort, easily seen to be inadequate.  Uses of LLMs in testing
+tasks go beyond the simple idea of generating unit tests, but further
+applications may be best understood in the context of the core
+differences between generating production code and generating test
+code, which we discuss first.
 
-\section{Code Generation: Production Code vs. Test Code}
+\section{LLM-Based Code Generation: Production Code vs. Test Code}
 
 The rationale behind our argument that software testing is the most
 promising application of current-day LLMs, given their capabiities,
-can be most easily understood by examining the difference between
+can be most easily understood by examining the differences between
 using LLMs to generate \emph{production} code (application code that is
 executed when the code is deployed:  from the standpoint of testing,
 the ``code under test'' (CUT)) and using LLMs to
@@ -343,7 +365,60 @@ be practical to simply use a large number of LLM generated tests for
 the same code, assuming that redundnacy will be low cost (after all,
 in fuzzing thousands of ineffective tests are executed for each
 ``useful'' test).  An equivalent approach for production code seems
-unlikely to usually be possible
+unlikely to usually be possible.
+
+
+\section{Beyond Generating Unit Tests}
+
+The discussion above largely focuses on using LLMs to generate ``test
+code''---typically, unit tests.  However, LLMs are also well-suited
+for more esoteric testing tasks, including some that do not involve
+generating code at all.
+
+\subsection{Other Test Generation Tasks}
+
+The context of existing production code gives LLMs more to work with,
+and the context of existing tests for production code may give LLMs
+even more to work with: LLMs can be used to augment existing tests
+with better oracles~\cite{OracleGEN}.  This is a particulary promising
+application, since the tendency of oracle quality to lag behind code coverage
+is an enduring and under-addressed problem in software testing~\cite{MindGap}.
+
+One critical problem in software testing is that while developers are
+at least familliar with writing unit tests, few have experience in
+writing property-based tests or fuzz-drivers~\cite{goldstein2022some}, a different task
+that is often perceived as very difficult.  Generalizing oracle
+generation from specific to parameterized unit tests is a potential
+long-term solution to this problem, and there is already work underway
+to generate fuzz drivers using LLMs~\cite{zhang2023understanding}.
+
+Finally, LLMs can directly be used as fuzzers, for compilers and other
+language tools~\cite{xia2023universal} or even
+deep-learning libraries themselves~\cite{LLMFuzz}.
+
+\subsection{Non-Code-Generation Testing Tasks}
+
+Mutation testing has long been one of the most promising ways to
+evaluate testing efforts; however, it is also expensive, both in terms
+of computational and human effort.  Recently, LLMs have been used to
+significantly reduce the computational costs of mutation testing, by
+predicting (without running them) which mutants will kill which
+tests~\cite{ContextPMT}.  On obvious next step is to apply LLMs to the
+human-effort-intensive problems of identifying equivalent
+mutants~\cite{TCE} and prioritizing which mutants to examine~\cite{StatMut}.
+
+\section{Conclusion}
+
+We consider it fortunate that LLMs are likely highly suited to testing
+tasks, because, frankly, software developers generally do not enjoy
+testing~\cite{DevsHateTesting}, and therefore often do not put sufficient effort into
+testing~\cite{DevsDontTestEnough} or reviewing test code~\cite{TestCodeReview}.  Removing the burden of unpleasant and onerous (and often
+poorly done) tasks from humans is, we claim, the ideal use of
+automation.  Better testing is, additionally, even more critical in a
+world where some portion of the code under test is to be generated by
+LLMs, which may produce new and surprising kinds of bugs that humans
+have trouble imagining, and thus addressing with appropriate tests.
+
 
 \bibliographystyle{plain}
 \bibliography{bibliography}

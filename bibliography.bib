@@ -1,3 +1,140 @@
+@misc{zhang2023understanding,
+      title={Understanding Large Language Model Based Fuzz Driver Generation}, 
+      author={Cen Zhang and Mingqiang Bai and Yaowen Zheng and Yeting Li and Xiaofei Xie and Yuekang Li and Wei Ma and Limin Sun and Yang Liu},
+      year={2023},
+      eprint={2307.12469},
+      archivePrefix={arXiv},
+      primaryClass={cs.CR}
+}
+
+
+@INPROCEEDINGS{MindGap,
+  author={Jain, Kush and Kalburgi, Goutamkumar Tulajappa and Le Goues, Claire and Groce, Alex},
+  booktitle={2023 IEEE 34th International Symposium on Software Reliability Engineering (ISSRE)}, 
+  title={Mind the Gap: The Difference Between Coverage and Mutation Score Can Guide Testing Efforts}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={102-113},
+  doi={10.1109/ISSRE59848.2023.00036}}
+
+@inproceedings{OracleGEN,
+  author       = {Elizabeth Dinella and
+                  Gabriel Ryan and
+                  Todd Mytkowicz and
+                  Shuvendu K. Lahiri},
+  title        = {{TOGA:} {A} Neural Method for Test Oracle Generation},
+  booktitle    = {44th {IEEE/ACM} 44th International Conference on Software Engineering,
+                  {ICSE} 2022, Pittsburgh, PA, USA, May 25-27, 2022},
+  pages        = {2130--2141},
+  publisher    = {{ACM}},
+  year         = {2022},
+  url          = {https://doi.org/10.1145/3510003.3510141},
+  doi          = {10.1145/3510003.3510141},
+  timestamp    = {Mon, 18 Jul 2022 16:47:42 +0200},
+  biburl       = {https://dblp.org/rec/conf/icse/DinellaRML22.bib},
+  bibsource    = {dblp computer science bibliography, https://dblp.org}
+}
+
+@inproceedings{goldstein2022some,
+  title={Some Problems with Properties},
+  author={Goldstein, Harrison and Cutler, Joseph W and Stein, Adam and Pierce, Benjamin C and Head, Andrew},
+  booktitle={Proc. Workshop on the Human Aspects of Types and Reasoning Assistants (HATRA)},
+  year={2022}
+}
+
+@inproceedings{TestCodeReview,
+author = {Spadini, Davide and Aniche, Maur\'{\i}cio and Storey, Margaret-Anne and Bruntink, Magiel and Bacchelli, Alberto},
+title = {When Testing Meets Code Review: Why and How Developers Review Tests},
+year = {2018},
+isbn = {9781450356381},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3180155.3180192},
+doi = {10.1145/3180155.3180192},
+abstract = {Automated testing is considered an essential process for ensuring software quality. However, writing and maintaining high-quality test code is challenging and frequently considered of secondary importance. For production code, many open source and industrial software projects employ code review, a well-established software quality practice, but the question remains whether and how code review is also used for ensuring the quality of test code. The aim of this research is to answer this question and to increase our understanding of what developers think and do when it comes to reviewing test code. We conducted both quantitative and qualitative methods to analyze more than 300,000 code reviews, and interviewed 12 developers about how they review test files. This work resulted in an overview of current code reviewing practices, a set of identified obstacles limiting the review of test code, and a set of issues that developers would like to see improved in code review tools. The study reveals that reviewing test files is very different from reviewing production files, and that the navigation within the review itself is one of the main issues developers currently face. Based on our findings, we propose a series of recommendations and suggestions for the design of tools and future research.},
+booktitle = {Proceedings of the 40th International Conference on Software Engineering},
+pages = {677–687},
+numpages = {11},
+keywords = {code review, gerrit, automated testing, software testing},
+location = {Gothenburg, Sweden},
+series = {ICSE '18}
+}
+
+
+
+@INPROCEEDINGS{DevsDontTestEnough,
+  author={Beller, Moritz and Gousios, Georgios and Zaidman, Andy},
+  booktitle={2015 IEEE/ACM 37th IEEE International Conference on Software Engineering}, 
+  title={How (Much) Do Developers Test?}, 
+  year={2015},
+  volume={2},
+  number={},
+  pages={559-562},
+  doi={10.1109/ICSE.2015.193}}
+
+@INPROCEEDINGS{DevsHateTesting,
+  author={Straubinger, Philipp and Fraser, Gordon},
+  booktitle={2023 IEEE 34th International Symposium on Software Reliability Engineering (ISSRE)}, 
+  title={A Survey on What Developers Think About Testing}, 
+  year={2023},
+  volume={},
+  number={},
+  pages={80-90},
+  doi={10.1109/ISSRE59848.2023.00075}}
+
+@misc{xia2023universal,
+      title={Universal Fuzzing via Large Language Models}, 
+      author={Chunqiu Steven Xia and Matteo Paltenghi and Jia Le Tian and Michael Pradel and Lingming Zhang},
+      year={2023},
+      eprint={2308.04748},
+      archivePrefix={arXiv},
+      primaryClass={cs.SE}
+}
+
+@inproceedings{LLMFuzz,
+author = {Deng, Yinlin and Xia, Chunqiu Steven and Peng, Haoran and Yang, Chenyuan and Zhang, Lingming},
+title = {Large Language Models Are Zero-Shot Fuzzers: Fuzzing Deep-Learning Libraries via Large Language Models},
+year = {2023},
+isbn = {9798400702211},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3597926.3598067},
+doi = {10.1145/3597926.3598067},
+abstract = {Deep Learning (DL) systems have received exponential growth in popularity and have become ubiquitous in our everyday life. Such systems are built on top of popular DL libraries, e.g., TensorFlow and PyTorch which provide APIs as building blocks for DL systems. Detecting bugs in these DL libraries is critical for almost all downstream DL systems in ensuring effectiveness/safety for end users. Meanwhile, traditional fuzzing techniques can be hardly effective for such a challenging domain since the input DL programs need to satisfy both the input language (e.g., Python) syntax/semantics and the DL API input/shape constraints for tensor computations.
+To address these limitations, we propose TitanFuzz – the first approach to directly leveraging Large Language Models (LLMs) to generate input programs for fuzzing DL libraries. LLMs are titanic models trained on billions of code snippets and can autoregressively generate human-like code snippets. Our key insight is that modern LLMs can also include numerous code snippets invoking DL library APIs in their training corpora, and thus can implicitly learn both language syntax/semantics and intricate DL API constraints for valid DL program generation. More specifically, we use both generative and infilling LLMs (e.g., Codex/InCoder) to generate and mutate valid/diverse input DL programs for fuzzing. Our experimental results demonstrate that TitanFuzz can achieve 30.38\%/50.84\% higher code coverage than state-of-the-art fuzzers on TensorFlow/PyTorch. Furthermore, TitanFuzz is able to detect 65 bugs, with 44 already confirmed as previously unknown bugs.
+This paper demonstrates that modern titanic LLMs can be leveraged to directly perform both generation-based and mutation-based fuzzing studied for decades, while being fully automated, generalizable, and applicable to domains challenging for traditional approaches (such as DL systems). We hope TitanFuzz can stimulate more work in this promising direction of LLMs for fuzzing.},
+booktitle = {Proceedings of the 32nd ACM SIGSOFT International Symposium on Software Testing and Analysis},
+pages = {423–435},
+numpages = {13},
+keywords = {Test Generation, Fuzz Testing, Large Language Model},
+location = {, Seattle, WA, USA, },
+series = {ISSTA 2023}
+}
+
+
+
+
+@inproceedings{ContextPMT,
+author = {Jain, Kush and Alon, Uri and Groce, Alex and Le Goues, Claire},
+title = {Contextual Predictive Mutation Testing},
+year = {2023},
+isbn = {9798400703270},
+publisher = {Association for Computing Machinery},
+address = {New York, NY, USA},
+url = {https://doi.org/10.1145/3611643.3616289},
+doi = {10.1145/3611643.3616289},
+abstract = {Mutation testing is a powerful technique for assessing and improving test suite quality that artificially introduces bugs and checks whether the test suites catch them. However, it is also computationally expensive and thus does not scale to large systems and projects. One promising recent approach to tackling this scalability problem uses machine learning to predict whether the tests will detect the synthetic bugs, without actually running those tests. However, existing predictive mutation testing approaches still misclassify 33\% of detection outcomes on a randomly sampled set of mutant-test suite pairs. We introduce MutationBERT, an approach for predictive mutation testing that simultaneously encodes the source method mutation and test method, capturing key context in the input representation. Thanks to its higher precision, MutationBERT saves 33\% of the time spent by a prior approach on checking/verifying live mutants. MutationBERT, also outperforms the state-of-the-art in both same project and cross project settings, with meaningful improvements in precision, recall, and F1 score. We validate our input representation, and aggregation approaches for lifting predictions from the test matrix level to the test suite level, finding similar improvements in performance. MutationBERT not only enhances the state-of-the-art in predictive mutation testing, but also presents practical benefits for real-world applications, both in saving developer time and finding hard to detect mutants that prior approaches do not.},
+booktitle = {Proceedings of the 31st ACM Joint European Software Engineering Conference and Symposium on the Foundations of Software Engineering},
+pages = {250–261},
+numpages = {12},
+keywords = {mutation analysis, code coverage, test oracles},
+location = {, San Francisco, CA, USA, },
+series = {ESEC/FSE 2023}
+}
+
+
+
 @inproceedings{pearce2022asleep,
   title={Asleep at the keyboard? assessing the security of github copilot’s code contributions},
   author={Pearce, Hammond and Ahmad, Baleegh and Tan, Benjamin and Dolan-Gavitt, Brendan and Karri, Ramesh},
