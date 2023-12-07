@@ -367,6 +367,23 @@ in fuzzing thousands of ineffective tests are executed for each
 ``useful'' test).  An equivalent approach for production code seems
 unlikely to usually be possible.
 
+\begin{table*}
+  \begin{tabular}{l|l|l}
+    & {\bf How Hard is the Specification to Satisfy?} & {\bf
+                                                        How Hard is
+                                                        the
+                                                        Specification
+                                                        to Check?} \\
+    \hline
+    Production Code & Hard  (Correctness) & Hard (Program
+                                            Verification) \\
+    \hline
+    Test Code & Easy (Utility) & Easy (Check Test Metrics) \\
+  \end{tabular}
+  \end{table*}
+
+One way to consider the fundamental difference is shown in Table~\ref{tab:diff}.
+
 \section{Test Code Fits LLM Strengths}
 
 In addition to the fundamental differences in outcomes above, some
