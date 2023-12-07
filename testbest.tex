@@ -367,24 +367,33 @@ in fuzzing thousands of ineffective tests are executed for each
 ``useful'' test).  An equivalent approach for production code seems
 unlikely to usually be possible.
 
-\section{Generating Test Code}
+\section{Test Code Fits LLM Strengths}
 
-We focus on factors that make generating test code a natural application of 
-LLMs. We argue that many of common pitfalls of generating source code are mitigated 
-or entirely not possible in the domain of software testing. In many circumstances, test 
-code is \emph{more} natural than source code, making it ideal for LLM application.
+In addition to the fundamental differences in outcomes above, some
+specific aspects of test code make it particularly suitable for LLM
+generation.  Here we delve into more technical aspects of this
+suitability, tied to the ways in which current LLMs are produced and refined.
 
 \subsection{Stronger Metrics and Oracle}
 
-One challenge with source code generation is defining ''correctness'' or quantifying 
-how close a model's output is to what is desired.  Code generated should 1. resemble code that a \emph{developer} would 
-write 2. meet some kind of specification of program behavior. To address the first problem, researchers defined a wide 
-range of metrics, ranging from BLEU~\cite{BLEU}, ROUGE-L~\cite{ROUGE}, and even more code specific metrics that perform 
+One challenge with source code generation is defining ``correctness'' or quantifying 
+how close a model's output is to what is desired.  Code generated
+should
+
+\begin{enumerate}
+\item resemble code that a \emph{developer} would 
+  write
+\item and satisfy some kind of specification of program behavior.
+\end{enumerate}
+
+\noindent  To address the first problem, researchers have defined a wide 
+range of metrics, ranging from BLEU~\cite{BLEU}, ROUGE-L~\cite{ROUGE}, and even more code-specific metrics that perform 
 AST matching and dataflow analysis such as CodeBLEU~\cite{CodeBLEU}, CrystalBLEU~\cite{CrystalBLEU} and CodeBertScore~\cite{CodeBERTScore}.
-However, fundamentally all these metrics do not capture the true notion of ``correctness'', a model could generate code that adheres to the 
-specification defined, while looking different than the developer ``gold'' code. Generating semantically equivalent code to what a developer wrote
-may have significantly lower lexical scores, despite being an instance of correct generation. Fundamentally, the core issue is that there 
-is no \emph{oracle} in code generation, thus these lexical metrics are just an approximation of what generated code should look like.
+However, fundamentally all these metrics do not capture the true notion of ``correctness'': a model could generate code that adheres to the 
+specification defined, while looking different than the developer's
+hypothetical ``gold'' code. Conversely, semantically equivalent code
+to what a developer would write (or has written) might have significantly lower lexical scores, despite being an instance of correct generation. Fundamentally, the core issue is that there 
+is no \emph{oracle} in code generation, and these lexical metrics are just an approximation of what generated code should look like.
 
 Test generation does not suffer from these pitfalls. Unlike code generation, there is a strong \emph{oracle} in testing. Tests must exercise code 
 paths of the method under test and be able to catch regressions or potential bugs a developer might introduce into the code. For measuring whether 
@@ -399,7 +408,9 @@ unlike in code generation, where reinforcement learning requires human annotatio
 \subsection{Potential for Easy Transfer Learning via Prompting}
 
 Test code and source code are fundamentally similar in structure and content. Test code leverages similar programming language 
-constructs such as control and data flow, often in a simplified way (test code tends to be less complex than the code it is testing).
+constructs such as control and data flow, often in a simplified way
+(test code tends to be less complex than the code it is testing; e.g.,
+most test code is loop-free and much test code is even conditional-free).
 Modern LLMs have been pretrained on millions of source code tokens, thus these models have a strong understanding of code semantics 
 and behavior. This can be seem with CodeBERT~\cite{codebert} embeddings outperforming prior work such as Code2Vec~\cite{code2vec} 
 and TF-IDF~\cite{tfidf}, with the CodeBERT vectors capturing some notion of semantic similarity rather than pure token match (capture by techniques 
